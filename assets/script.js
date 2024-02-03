@@ -1,22 +1,11 @@
 
 
 
-var apiKey = "NGMel7eRMUXXZi8wrXSz5U45GI25vqZI";
-var cityName = "London";
-var baseUrl =`https://app.ticketmaster.com/discovery/v2/events.json?city=${cityName}&apikey=${apiKey}`;
-
-fetch(baseUrl).then(function(response){
-    return response.json();
-}).then(function(data){
-   
-    console.log(data);
-
-})
-
 var city = "london";
 var cityName = "London";
 var apiKey= "NGMel7eRMUXXZi8wrXSz5U45GI25vqZI";
-var baseUrl=`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=UK&apikey=${apiKey}`;
+var baseUrl=`https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`
+
 
 
 function getCityEvents(){
@@ -27,22 +16,7 @@ function getCityEvents(){
     console.log(data);
 })}
 
-getDisplayCountryCodes();
 getCityEvents();
-
-/*Function to display country code */
-function getDisplayCountryCodes(){
-
-fetch("https://restcountries.com/v2/all")
-.then(function(response){
- return response.json();
-}).then(function(data){
-    console.log(data);
-    
-})
-
-}
-
 
 
     const options = {
