@@ -11,24 +11,34 @@
 		/>
 	</head>
 	<body>
-		<header>City Explorer</header>
-		<div class="container">
-			<section class="search-bar">
-				<!-- check bootstrap for below -->
-				<!-- <search-bar></search-bar> -->
-				<!-- <button></button> -->
-			</section>
+		<header>
+			<div class="container">
+				<h1>City Explorer</h1>
+				<section class="search-bar">
+	
+		<!-- Input field and button -->
+		<label for="">Enter city name:</label>
+		<input type="text" id="searchInput" placeholder="Enter search term" />
+		<button id="searchButton" class="btn btn-primary">Search</button> 
+				</section>
+			</div>
+		</header>
 
+		<div class="container">
 			<div class="row">
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<section class="event"></section>
+					<section class="event">
+						<!-- Content for events goes here -->
+					</section>
 				</div>
 				<div class="col-md-4">
-					<section class="places"></section>
-				</div>
-			</div>
-		</div>
+					<section class="places">
+						<!-- Content for places goes here -->
+					</section>
+<!-- Bootstrap modal for displaying messages -->
+
+
 
 		<!-- jQuery and Bootstrap JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
