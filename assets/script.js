@@ -1,36 +1,71 @@
 
 
-
-
 var city = "london";
-var cityName = "London";
+var cityName = "Manchester";
 var apiKey= "NGMel7eRMUXXZi8wrXSz5U45GI25vqZI";
 var baseUrl=`https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`
 
 
-
+//Get Event details in the city
 function getCityEvents(){
-    fetch(baseUrl).then(function(response)
-    { return response.json();
-    }).then(function(data)
-    { console.log(data);
-    console.log(data);
+
+    fetch(baseUrl)
+    .then(function(response)
+    { 
+        return response.json();
+    })
+    .then(function(data)
+    { 
+        console.log(data);
+    
+     var allEvents= data._embedded.events;
+     
+     console.log(allEvents);
+     console.log(allEvents[0].images[0].url);
+     console.log(allEvents[0].dates.start.localDate);
+     console.log(allEvents[0].url);
+
+
+    var eventObjects = []; 
+
+      for (var i = 0; i < allEvents.length; i++) {
+        var eventDetails = {
+          eventName: allEvents[i].name,
+          eventId: allEvents[i].id,
+          imageUrl: allEvents[i].images[0].url,
+          time: allEvents[i].dates.start.localDate,
+          ticket: allEvents[i].url,
+        };
+
+        eventObjects.push(eventDetails);
+    }
+
+
+    for (var j = 0; j < 5; j++) {
+        var rIndex = Math.floor(Math.random() * eventObjects.length);
+        var divEl=$("<div>").attr("class","card");
+        var h4El=$("<h4>");
+        var imgEl=$("<img>").attr("src",eventObjects[rIndex].imageUrl);
+        var ticketEl=$("<a>").attr("href", eventObjects[rIndex].ticket).text("Click for Ticket details");
+        h4El.text(`Event Name:${eventObjects[rIndex].eventName} 
+                   Event Id:${ eventObjects[rIndex].eventId} 
+                   Event Date:${ eventObjects[rIndex].time }`);
+
+        divEl.append(h4El,imgEl,ticketEl);
+        $(".event").append(divEl);
+
+        console.log(`Event ${j + 1}:`, eventObjects[rIndex]);
+        
+
+      }
+ 
+
 })}
 
 getCityEvents();
 
 
-var apiKey = "NGMel7eRMUXXZi8wrXSz5U45GI25vqZI";
-var cityName = "London";
-var baseUrl =`https://app.ticketmaster.com/discovery/v2/events.json?city=*&size=200&=${cityName}&apikey=${apiKey}`;
 
-fetch(baseUrl).then(function(response){
-    return response.json();
-}).then(function(data){
-   
-    console.log(data);
-
-})
 
 // Foursqare API call
 
