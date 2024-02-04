@@ -1,6 +1,25 @@
 
 
 
+
+var city = "london";
+var cityName = "London";
+var apiKey= "NGMel7eRMUXXZi8wrXSz5U45GI25vqZI";
+var baseUrl=`https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`
+
+
+
+function getCityEvents(){
+    fetch(baseUrl).then(function(response)
+    { return response.json();
+    }).then(function(data)
+    { console.log(data);
+    console.log(data);
+})}
+
+getCityEvents();
+
+
 var apiKey = "NGMel7eRMUXXZi8wrXSz5U45GI25vqZI";
 var cityName = "London";
 var baseUrl =`https://app.ticketmaster.com/discovery/v2/events.json?city=*&size=200&=${cityName}&apikey=${apiKey}`;
@@ -14,6 +33,7 @@ fetch(baseUrl).then(function(response){
 })
 
 // Foursqare API call
+
 
 var city = "London"
     const options = {
