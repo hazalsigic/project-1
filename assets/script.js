@@ -71,13 +71,17 @@ getCityEvents();
 
 
 var city = "London"
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'fsq36sfrhRZqepwiExveGGmG+6dJ5fjiN5oB26UQIeYh4Co='
-        }
-      };
+
+      
+      function getCityPlaces() {
+
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: 'fsq36sfrhRZqepwiExveGGmG+6dJ5fjiN5oB26UQIeYh4Co='
+          }
+        };
       
       fetch('https://api.foursquare.com/v3/places/search?near=' + city, options)
         .then(function(response){
@@ -123,6 +127,9 @@ var city = "London"
           }
         
         })
+      }
+
+getCityPlaces();
         
 
 
