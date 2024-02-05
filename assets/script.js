@@ -1,3 +1,30 @@
+// Get references to the input and button elements
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const messageModal = document.getElementById('messageModal');
+const messageBody = document.getElementById('messageBody');
+
+// Add an event listener to the button
+searchButton.addEventListener('click', function () {
+	// Get the value from the input field and trim whitespace
+	const searchTerm = searchInput.value.trim();
+	// Check if search term is empty
+	if (searchTerm === '') {
+		// Display message in modal
+		messageBody.textContent = 'Please enter a valid city name.';
+		$(messageModal).modal('show');
+
+		// Exit function if search term is empty
+		return;
+	}
+
+	// Perform some action with the search term (e.g., display it in the console)
+	console.log('Search term:', searchTerm);
+
+	// Clear the input field
+	searchInput.value = '';
+});
+
 var city = 'london';
 var cityName = 'Manchester';
 var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
