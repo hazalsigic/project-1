@@ -6,6 +6,10 @@ const messageBody = document.getElementById('messageBody');
 
 // Add an event listener to the button
 searchButton.addEventListener('click', function () {
+
+
+//Declaring the variables for function getCity
+
 	// Get the value from the input field and trim whitespace
 	const searchTerm = searchInput.value.trim();
 	// Check if search term is empty
@@ -21,70 +25,94 @@ searchButton.addEventListener('click', function () {
 	// Perform some action with the search term (e.g., display it in the console)
 	console.log('Search term:', searchTerm);
   getCityPlaces();
+  getCityEvents();
 
 	// Clear the input field
 	searchInput.value = '';
 });
 
-var city = 'london';
-var cityName = 'Manchester';
-var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
-var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
-//Get Event details in the city
+//Get Event details based on the city name
 function getCityEvents() {
+
+    var cityName = $("#searchInput").val();
+    var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
+    var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
+
+    
+
 	fetch(baseUrl)
 		.then(function (response) {
 			return response.json();
 		})
 		.then(function (data) {
+
 			console.log(data);
 
 			var allEvents = data._embedded.events;
+            var copyAllEvents = allEvents;
+            var uniqueEvents = [];
+
 
 			console.log(allEvents);
 			console.log(allEvents[0].images[0].url);
 			console.log(allEvents[0].dates.start.localDate);
 			console.log(allEvents[0].url);
 
-			var eventObjects = [];
+ 
+//Function to check duplicate event names.
+    function isAlreadyExist(element) {
+        console.log("Length of copy event:" + copyAllEvents.length);
+        for (var i = 0; i < copyAllEvents.length; i++) {
+            if (element.name === copyAllEvents[i].name) {
+                return true;  
+            }
+        }
+        return false; 
+    }
+    
+    // creates an array without duplicate values by validating event name.
+    for (var j = 0; j < allEvents.length; j++) {
+        if (!uniqueEvents.find(isAlreadyExist)) {
+            uniqueEvents.push(allEvents[j]);
+            console.log("Event added: " + allEvents[j].name);
+        } else {
+            console.log("Duplicate event: " + allEvents[j].name);
+        }
+       copyAllEvents = copyAllEvents.slice(1);
+    }
+    
+    console.log(uniqueEvents);
+    displayCityEvents();
 
-			for (var i = 0; i < allEvents.length; i++) {
-				var eventDetails = {
-					eventName: allEvents[i].name,
-					eventId: allEvents[i].id,
-					imageUrl: allEvents[i].images[0].url,
-					time: allEvents[i].dates.start.localDate,
-					ticket: allEvents[i].url,
-				};
+//Displays event details in the browser.
+function displayCityEvents(){
+  
+  for (var k = 0; k < 5; k++) {
+    var rIndex = Math.floor(Math.random() * uniqueEvents.length);
+    var divEl=$("<div>").attr("class","card");
+    var h5El=$("<h5>");
+    var dateEl=$("<h6>");
+    var imgEl=$("<img>").attr("src",uniqueEvents[rIndex].images[0].url);
+    var ticketEl=$("<a>").attr("href", uniqueEvents[rIndex].url).text("Ticket details here... ");
+    h5El.text(`${uniqueEvents[rIndex].name}`);
+             dateEl.text(`Date:${uniqueEvents[rIndex].dates.start.localDate }`);
 
-				eventObjects.push(eventDetails);
-			}
+    divEl.append(h5El,dateEl,imgEl,ticketEl);
+    $(".event").append(divEl);
 
-			for (var j = 0; j < 5; j++) {
-				var rIndex = Math.floor(Math.random() * eventObjects.length);
-				var divEl = $('<div>').attr('class', 'card');
-				var h4El = $('<h4>');
-				var imgEl = $('<img>').attr(
-					'src',
-					eventObjects[rIndex].imageUrl
-				);
-				var ticketEl = $('<a>')
-					.attr('href', eventObjects[rIndex].ticket)
-					.text('Click for Ticket details');
-				h4El.text(`Event Name:${eventObjects[rIndex].eventName} 
-                   Event Id:${eventObjects[rIndex].eventId} 
-                   Event Date:${eventObjects[rIndex].time}`);
+     
 
-				divEl.append(h4El, imgEl, ticketEl);
-				$('.event').append(divEl);
+  }
 
-				console.log(`Event ${j + 1}:`, eventObjects[rIndex]);
-			}
-		});
+
+
 }
 
-getCityEvents();
+});
+}
+
+
 
 // Foursqare API call
 
