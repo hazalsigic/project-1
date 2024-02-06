@@ -106,7 +106,7 @@ function getCityEvents() {
 //Displays event details in the browser.
 function displayCityEvents(){
   
-  for (var k = 0; k < 6; k++) {
+  for (var k = 0; k < 8; k++) {
     
     var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
 	$(".event").append(divEl);
@@ -116,7 +116,7 @@ function displayCityEvents(){
 	divEl.append(imgDiv);
 
 	var imgEl=$("<img>").attr({
-		src: uniqueEvents[rIndex].images[0].url,
+		src: uniqueEvents[k].images[0].url,
 		class: "card-img-left example-card-img-responsive",
 	})
 	imgDiv.append(imgEl);
@@ -127,7 +127,7 @@ function displayCityEvents(){
 
     var h5El=$("<h5>");
 	h5El.attr("class", "card-title");
-	h5El.text(`${uniqueEvents[rIndex].name}`);
+	h5El.text(`${uniqueEvents[k].name}`);
 
     var dateEl=$("<h6>");
     var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
