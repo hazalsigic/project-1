@@ -14,22 +14,26 @@
 	</head>
 	<body>
 		<header class="header">
-			<div class="container">
-        <h1>City Explorer</h1>
-			</div>
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container">
+				  <h1 class="display-4">City Explorer</h1>
+				  <p class="lead">Search for a city to unlock unmissable events and landmarks in your next destination.</p>
+				</div>
+			  </div>
 		</header>
 
         <section>
 		<div class="search-bar">
-			<!-- Input field and button -->
-			<label for="">Enter city name:</label>
-			<input type="text" id="searchInput" placeholder="Enter search term" />
-			<button id="searchButton" class="btn btn-primary">Search</button> 
-            
+			<div class="input-group mb-5 col-md-12 col-md-6 col-lg-6">
+				<input type="text" class="form-control" id="searchInput" placeholder="Enter a city" aria-label="Enter a city" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+				  <button class="btn btn-outline-secondary" id="searchButton" type="button">Search</button>
+				</div>
+			</div>
 		</div>
         </section>
 			
-		<div class="container">
+		<div class="container mt-5">
 		<div class="row">
 			<div class="col-md-12 col-md-6 col-lg-6 eventheader">
 				<section class="event">
