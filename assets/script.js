@@ -20,6 +20,7 @@ searchButton.addEventListener('click', function () {
 
 	// Perform some action with the search term (e.g., display it in the console)
 	console.log('Search term:', searchTerm);
+  getCityPlaces();
 
 	// Clear the input field
 	searchInput.value = '';
@@ -87,9 +88,10 @@ getCityEvents();
 
 // Foursqare API call
 
-var city = 'London';
-
 function getCityPlaces() {
+
+  
+var city = $("#searchInput").val();
 	const options = {
 		method: 'GET',
 		headers: {
@@ -142,4 +144,4 @@ function getCityPlaces() {
 		});
 }
 
-getCityPlaces();
+
