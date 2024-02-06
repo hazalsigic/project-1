@@ -108,7 +108,7 @@ function displayCityEvents(){
   for (var k = 0; k < 6; k++) {
     var rIndex = Math.floor(Math.random() * uniqueEvents.length);
     
-    var divEl=$("<div>").attr("class","card flex-row my-2");
+    var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
 	$(".event").append(divEl);
 
 	var imgDiv = $("<div>")
@@ -195,7 +195,7 @@ var city = $("#searchInput").val();
 			for (i = 0; i < data.results.length; i++) {
 				//Creating the card
 				var card = $('<div>');
-				card.attr('class', 'card my-2 placesCard');
+				card.attr('class', 'card my-2 placesCard ml-4');
 				$('.places').append(card);
 
 				//Creating card Heading
