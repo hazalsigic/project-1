@@ -13,7 +13,7 @@
 
 
 
-.event {
+/* .event {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
@@ -27,8 +27,27 @@
     text-align: center;
     height: 300px; 
     transition: background-color 0.3s ease; 
+} */
+
+img {
+    width: 120px;
+    height: 120px;
+
+}
+
+.placesCard {
+    height: 122px;
+}
+
+.card {
+    box-shadow: 5px 5px 5px rgb(183, 186, 187);
 }
 
 .card:hover {
     background-color: #f0f0f0; 
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
 }
