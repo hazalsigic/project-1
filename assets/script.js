@@ -26,7 +26,11 @@ searchButton.addEventListener('click', function () {
 	console.log('Search term:', searchTerm);
 
 
-   
+
+
+	$(".event").empty();
+    $(".places").empty();
+
   getCityPlaces();
   getCityEvents();
 
@@ -176,6 +180,12 @@ var city = $("#searchInput").val();
 				cardHeading.attr('class', 'card-title');
 				cardHeading.text(data.results[i].name);
 				card.append(cardHeading);
+
+				//Creating place category
+				var cardCategory = $('<p>');
+				cardCategory.attr('card-subtitle', 'mb-2 text-muted');
+				cardCategory.text(data.results[i].categories[0].name);
+				card.append(cardCategory);
 
 				//Adding address to the card
 				var cardAddress = $('<p>');
