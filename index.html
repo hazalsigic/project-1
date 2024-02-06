@@ -5,36 +5,48 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>City Explorer</title>
 
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-		/>
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"	/>
+
+        
+        <link  rel="stylesheet" href="./assets/style.css" />    
+
 	</head>
 	<body>
-		<header>
+		<header class="header">
 			<div class="container">
         <h1>City Explorer</h1>
 			</div>
 		</header>
-		
+
+        <section>
 		<div class="search-bar">
 			<!-- Input field and button -->
 			<label for="">Enter city name:</label>
 			<input type="text" id="searchInput" placeholder="Enter search term" />
 			<button id="searchButton" class="btn btn-primary">Search</button> 
+            
 		</div>
+        </section>
 			
 		<div class="container">
 		<div class="row">
-			<div class="col-md-12 col-md-6 col-lg-6">
+			<div class="col-md-12 col-md-6 col-lg-6 eventheader">
 				<section class="event">
+                    
 					<!-- Content for events goes here -->
 				</section>
 			</div>
+            
 			<div class="col-md-12 col-md-6 col-lg-6">
 			    <section class="places">
 					<!-- Content for places goes here -->
 				</section>
+            
+            
+            </div>
+            </div>
+            </div>
 
 <!-- Bootstrap modal for displaying messages -->
 <div
@@ -73,6 +85,9 @@
 				</div>
 			</div>
 		</div>
+
+
+
 
 		<!-- jQuery and Bootstrap JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

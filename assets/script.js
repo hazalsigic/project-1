@@ -24,8 +24,13 @@ searchButton.addEventListener('click', function () {
 
 	// Perform some action with the search term (e.g., display it in the console)
 	console.log('Search term:', searchTerm);
+
+
+
+
 	$(".event").empty();
     $(".places").empty();
+
   getCityPlaces();
   getCityEvents();
 
@@ -37,11 +42,16 @@ searchButton.addEventListener('click', function () {
 //Get Event details based on the city name
 function getCityEvents() {
 
+    
+
+
     var cityName = $("#searchInput").val();
     var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
     var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
-    
+    var eventHeading = $('<h3>');
+    eventHeading.text(`Events in ${cityName}`);
+    $(".eventheader").prepend(eventHeading);
 
 	fetch(baseUrl)
 		.then(function (response) {
@@ -61,6 +71,7 @@ function getCityEvents() {
 			console.log(allEvents[0].dates.start.localDate);
 			console.log(allEvents[0].url);
 
+           
  
 //Function to check duplicate event names.
     function isAlreadyExist(element) {
@@ -85,20 +96,25 @@ function getCityEvents() {
     }
     
     console.log(uniqueEvents);
+
     displayCityEvents();
+
+   
 
 //Displays event details in the browser.
 function displayCityEvents(){
   
-  for (var k = 0; k < 5; k++) {
+  for (var k = 0; k < 6; k++) {
     var rIndex = Math.floor(Math.random() * uniqueEvents.length);
+    
     var divEl=$("<div>").attr("class","card");
     var h5El=$("<h5>");
     var dateEl=$("<h6>");
     var imgEl=$("<img>").attr("src",uniqueEvents[rIndex].images[0].url);
-    var ticketEl=$("<a>").attr("href", uniqueEvents[rIndex].url).text("Ticket details here... ");
+    var ticketEl=$("<a>").attr("href", uniqueEvents[rIndex].url).text("Book Now ");
+
     h5El.text(`${uniqueEvents[rIndex].name}`);
-             dateEl.text(`Date:${uniqueEvents[rIndex].dates.start.localDate }`);
+    dateEl.text(`Date:${uniqueEvents[rIndex].dates.start.localDate }`);
 
     divEl.append(h5El,dateEl,imgEl,ticketEl);
     $(".event").append(divEl);
