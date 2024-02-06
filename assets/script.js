@@ -51,6 +51,7 @@ function getCityEvents() {
 
     var eventHeading = $('<h3>');
     eventHeading.text(`Events in ${cityName}`);
+	eventHeading.attr("class", "title");
     $(".eventheader").prepend(eventHeading);
 
 	fetch(baseUrl)
@@ -107,17 +108,38 @@ function displayCityEvents(){
   for (var k = 0; k < 6; k++) {
     var rIndex = Math.floor(Math.random() * uniqueEvents.length);
     
-    var divEl=$("<div>").attr("class","card");
+    var divEl=$("<div>").attr("class","card flex-row my-2");
+	$(".event").append(divEl);
+
+	var imgDiv = $("<div>")
+	imgDiv.attr("class", "rounded");
+	divEl.append(imgDiv);
+
+	var imgEl=$("<img>").attr({
+		src: uniqueEvents[rIndex].images[0].url,
+		class: "card-img-left example-card-img-responsive",
+	})
+	imgDiv.append(imgEl);
+
+	var textDiv = $("<div>");
+	textDiv.attr("class", "mx-3 my-2");
+	divEl.append(textDiv);
+
     var h5El=$("<h5>");
+	h5El.attr("class", "card-title");
+	h5El.text(`${uniqueEvents[rIndex].name}`);
+
     var dateEl=$("<h6>");
-    var imgEl=$("<img>").attr("src",uniqueEvents[rIndex].images[0].url);
+	dateEl.attr("class", "card-subtitle");
+	dateEl.text(`Date:${uniqueEvents[rIndex].dates.start.localDate }`);
+
     var ticketEl=$("<a>").attr("href", uniqueEvents[rIndex].url).text("Book Now ");
+	ticketEl.attr("class", "card-link")
 
-    h5El.text(`${uniqueEvents[rIndex].name}`);
-    dateEl.text(`Date:${uniqueEvents[rIndex].dates.start.localDate }`);
-
-    divEl.append(h5El,dateEl,imgEl,ticketEl);
-    $(".event").append(divEl);
+	textDiv.append(h5El);
+	textDiv.append(dateEl);
+	textDiv.append(ticketEl);
+   
 
      
 
@@ -165,31 +187,32 @@ var city = $("#searchInput").val();
 
 			//Places heading
 			var placesHeading = $('<h3>');
-			placesHeading.text('Places to Discover');
+			placesHeading.text(`Places in ${city}`);
+			placesHeading.attr("class", "title");
 			$('.places').append(placesHeading);
 
 			//for loop creating multiple places from the data array
 			for (i = 0; i < data.results.length; i++) {
 				//Creating the card
 				var card = $('<div>');
-				card.attr('class', 'card');
+				card.attr('class', 'card my-2 placesCard');
 				$('.places').append(card);
 
 				//Creating card Heading
 				var cardHeading = $('<h5>');
-				cardHeading.attr('class', 'card-title');
+				cardHeading.attr('class', 'card-title mx-3 mt-2');
 				cardHeading.text(data.results[i].name);
 				card.append(cardHeading);
 
 				//Creating place category
 				var cardCategory = $('<p>');
-				cardCategory.attr('card-subtitle', 'mb-2 text-muted');
+				cardCategory.attr("class", "card-subtitle text-muted mx-3");
 				cardCategory.text(data.results[i].categories[0].name);
 				card.append(cardCategory);
 
 				//Adding address to the card
 				var cardAddress = $('<p>');
-				cardAddress.attr('class', 'card-text');
+				cardAddress.attr('class', 'card-text mx-3 mt-1');
 				cardAddress.text(data.results[i].location.formatted_address);
 				card.append(cardAddress);
 			}
