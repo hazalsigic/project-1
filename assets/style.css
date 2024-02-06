@@ -3,17 +3,14 @@
     background-color:burlywood;
 }
 
-/*section {
+
+   .search-bar {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-     
+    justify-content: center;
+    align-items: center;
 }
 
-.search-bar {
-    display: flex;
-    align-items: center;
-   }*/
+
 
 
 /* .event {

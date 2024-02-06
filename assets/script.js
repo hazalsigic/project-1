@@ -97,7 +97,8 @@ function getCityEvents() {
     }
     
     console.log(uniqueEvents);
-
+    
+	eventHeading.empty();
     displayCityEvents();
 
    
@@ -106,7 +107,6 @@ function getCityEvents() {
 function displayCityEvents(){
   
   for (var k = 0; k < 6; k++) {
-    var rIndex = Math.floor(Math.random() * uniqueEvents.length);
     
     var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
 	$(".event").append(divEl);
@@ -130,11 +130,13 @@ function displayCityEvents(){
 	h5El.text(`${uniqueEvents[rIndex].name}`);
 
     var dateEl=$("<h6>");
-	dateEl.attr("class", "card-subtitle");
-	dateEl.text(`Date:${uniqueEvents[rIndex].dates.start.localDate }`);
+    var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
+    var ticketEl=$("<a>").attr({href: uniqueEvents[k].url, target: "_blank"}).text("Book Now ");
+    	ticketEl.attr("class", "card-link")
+    h5El.text(`${uniqueEvents[k].name}`);
+    dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
+    	dateEl.attr("class", "card-subtitle");
 
-    var ticketEl=$("<a>").attr("href", uniqueEvents[rIndex].url).text("Book Now ");
-	ticketEl.attr("class", "card-link")
 
 	textDiv.append(h5El);
 	textDiv.append(dateEl);
