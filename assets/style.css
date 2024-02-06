@@ -42,6 +42,10 @@ img {
     height: 122px;
 }
 
+.card {
+    box-shadow: 5px 5px 5px rgb(183, 186, 187);
+}
+
 .card:hover {
     background-color: #f0f0f0; 
 }
