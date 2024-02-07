@@ -67,136 +67,102 @@ function getCityEvents() {
 			console.log(allEvents[0].images[0].url);
 			console.log(allEvents[0].dates.start.localDate);
 			console.log(allEvents[0].url);
-
-           
- 
-//Function to check duplicate event names.
-    function isAlreadyExist(element) {
-        console.log("Length of copy event:" + copyAllEvents.length);
-        for (var i = 0; i < copyAllEvents.length; i++) {
-            if (element.name === copyAllEvents[i].name) {
-                return true;  
-            }
-        }
-        return false; 
-    }
-    
-    // creates an array without duplicate values by validating event name.
-    for (var j = 0; j < allEvents.length; j++) {
-        if (!uniqueEvents.find(isAlreadyExist)) {
-            uniqueEvents.push(allEvents[j]);
-            console.log("Event added: " + allEvents[j].name);
-        } else {
-            console.log("Duplicate event: " + allEvents[j].name);
-        }
-       copyAllEvents = copyAllEvents.slice(1);
-    }
-    
-    console.log(uniqueEvents);
-    
-	eventHeading.empty();
-    displayCityEvents();
-
-   
-
-//Displays event details in the browser.
-function displayCityEvents(){
-
-	var eventHeading = $('<h3>');
-    eventHeading.text(`Events in ${cityName}`);
-	eventHeading.attr("class", "title");
-    $(".eventheader").prepend(eventHeading);
-  
-  for (var k = 0; k < 10; k++) {
-    
-    var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
-	$(".event").append(divEl);
-
-	var imgDiv = $("<div>")
-	imgDiv.attr("class", "rounded");
-	divEl.append(imgDiv);
-
-	var imgEl=$("<img>").attr({
-		src: uniqueEvents[k].images[0].url,
-		class: "card-img-left example-card-img-responsive",
-	})
-	imgDiv.append(imgEl);
-
-	var textDiv = $("<div>");
-	textDiv.attr("class", "mx-3 my-2");
-	divEl.append(textDiv);
-
-    var h5El=$("<h5>");
-	h5El.attr("class", "card-title");
-	h5El.text(`${uniqueEvents[k].name}`);
-
-    var dateEl=$("<h6>");
-    var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
-    var ticketEl=$("<a>").attr({href: uniqueEvents[k].url, target: "_blank"}).text("Book Now ");
-    	ticketEl.attr("class", "card-link")
-    h5El.text(`${uniqueEvents[k].name}`);
-    dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
-    	dateEl.attr("class", "card-subtitle");
-
-
-	textDiv.append(h5El);
-	textDiv.append(dateEl);
-	textDiv.append(ticketEl);
-
-   
-  
-  //Displays event details in the browser.
-  function displayCityEvents(){
-  
-
-	var eventHeading = $('<h3>');
-	eventHeading.text(`Events in ${cityName}`);
-	eventHeading.attr("class", "title");
-	$(".event").append(eventHeading);
-
-  for (var k = 0; k < 6; k++) {
-		
-	var divEl=$("<div>").attr("class","card flex-row my-2");
-  $(".event").append(divEl);
-  
-  var imgDiv = $("<div>")
-  imgDiv.attr("class", "rounded");
-  divEl.append(imgDiv);
-  
-  var imgEl=$("<img>").attr({
-	src: uniqueEvents[k].images[0].url,
-	class: "card-img-left example-card-img-responsive",
-  })
-  imgDiv.append(imgEl);
-  
-  var textDiv = $("<div>");
-  textDiv.attr("class", "mx-3 my-2");
-  divEl.append(textDiv);
-  
-	var h5El=$("<h5>");
-  h5El.attr("class", "card-title");
-  h5El.text(`${uniqueEvents[k].name}`);
-  
-	var dateEl=$("<h6>");
-  dateEl.attr("class", "card-subtitle");
-  dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
-  
-	var ticketEl=$("<a>").attr("href", uniqueEvents[k].url).text("Book Now ");
-  ticketEl.attr("class", "card-link")
-  
-  textDiv.append(h5El);
-  textDiv.append(dateEl);
-  textDiv.append(ticketEl);
-   
-   
-  
-  }
-  
-   
-  }
-  
-  });
-  }
+			
+			//Function to check duplicate event names.
+			function isAlreadyExist(element) {
+				console.log("Length of copy event:" + copyAllEvents.length);
+				for (var i = 0; i < copyAllEvents.length; i++) {
+					if (element.name === copyAllEvents[i].name) {
+						return true;  
+					}
+				}
+				return false; 
+			}
+			// creates an array without duplicate values by validating event name.
+			for (var j = 0; j < allEvents.length; j++) {
+				if (!uniqueEvents.find(isAlreadyExist)) {
+					uniqueEvents.push(allEvents[j]);
+					console.log("Event added: " + allEvents[j].name);
+				} else {
+					console.log("Duplicate event: " + allEvents[j].name);
+				}
+				copyAllEvents = copyAllEvents.slice(1);
+			}
+			
+			console.log(uniqueEvents);
+			eventHeading.empty();
+			displayCityEvents();
+			//Displays event details in the browser.
+			function displayCityEvents(){
+				var eventHeading = $('<h3>');
+				eventHeading.text(`Events in ${cityName}`);
+				eventHeading.attr("class", "title");
+				$(".eventheader").prepend(eventHeading);
+				for (var k = 0; k < 10; k++) {
+					var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
+					$(".event").append(divEl);
+					var imgDiv = $("<div>");
+					imgDiv.attr("class", "rounded");
+					divEl.append(imgDiv);
+					var imgEl=$("<img>").attr({
+						src: uniqueEvents[k].images[0].url,
+						class: "card-img-left example-card-img-responsive",
+					});
+					imgDiv.append(imgEl);
+					var textDiv = $("<div>");
+					textDiv.attr("class", "mx-3 my-2");
+					divEl.append(textDiv);
+					var h5El=$("<h5>");
+					h5El.attr("class", "card-title");
+					h5El.text(`${uniqueEvents[k].name}`);
+					var dateEl=$("<h6>");
+					var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
+					var ticketEl=$("<a>").attr({href: uniqueEvents[k].url, target: "_blank"}).text("Book Now ");
+					ticketEl.attr("class", "card-link");
+					h5El.text(`${uniqueEvents[k].name}`);
+					dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
+					dateEl.attr("class", "card-subtitle");
+					textDiv.append(h5El);
+					textDiv.append(dateEl);
+					textDiv.append(ticketEl);
+					
+					//Displays event details in the browser.
+					function displayCityEvents(){
+						var eventHeading = $('<h3>');
+						eventHeading.text(`Events in ${cityName}`);
+						eventHeading.attr("class", "title");
+						$(".event").append(eventHeading);
+						for (var k = 0; k < 6; k++) {
+							var divEl=$("<div>").attr("class","card flex-row my-2");
+							$(".event").append(divEl);
+							var imgDiv = $("<div>")
+							imgDiv.attr("class", "rounded");
+							divEl.append(imgDiv);
+							var imgEl=$("<img>").attr({
+								src: uniqueEvents[k].images[0].url,
+								class: "card-img-left example-card-img-responsive",
+							});
+							imgDiv.append(imgEl);
+							var textDiv = $("<div>");
+							textDiv.attr("class", "mx-3 my-2");
+							divEl.append(textDiv);
+							var h5El=$("<h5>");
+							h5El.attr("class", "card-title");
+							h5El.text(`${uniqueEvents[k].name}`);
+							var dateEl=$("<h6>");
+							dateEl.attr("class", "card-subtitle");
+							dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
+							var ticketEl=$("<a>").attr("href", uniqueEvents[k].url).text("Book Now ");
+							ticketEl.attr("class", "card-link")
+							textDiv.append(h5El);
+							textDiv.append(dateEl);
+							textDiv.append(ticketEl);
+						}
+					}
+				}
+			}
+		})
+	}
   
 
 
