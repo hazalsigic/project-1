@@ -44,8 +44,8 @@ function getCityEvents() {
 
     
 
-
-    var cityName = $("#searchInput").val();
+	var cityLower= $("#searchInput").val();
+    var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
     var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
     var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
@@ -105,8 +105,13 @@ function getCityEvents() {
 
 //Displays event details in the browser.
 function displayCityEvents(){
+
+	var eventHeading = $('<h3>');
+    eventHeading.text(`Events in ${cityName}`);
+	eventHeading.attr("class", "title");
+    $(".eventheader").prepend(eventHeading);
   
-  for (var k = 0; k < 6; k++) {
+  for (var k = 0; k < 10; k++) {
     
     var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
 	$(".event").append(divEl);
@@ -116,7 +121,7 @@ function displayCityEvents(){
 	divEl.append(imgDiv);
 
 	var imgEl=$("<img>").attr({
-		src: uniqueEvents[rIndex].images[0].url,
+		src: uniqueEvents[k].images[0].url,
 		class: "card-img-left example-card-img-responsive",
 	})
 	imgDiv.append(imgEl);
@@ -127,7 +132,7 @@ function displayCityEvents(){
 
     var h5El=$("<h5>");
 	h5El.attr("class", "card-title");
-	h5El.text(`${uniqueEvents[rIndex].name}`);
+	h5El.text(`${uniqueEvents[k].name}`);
 
     var dateEl=$("<h6>");
     var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
@@ -161,7 +166,8 @@ function displayCityEvents(){
 function getCityPlaces() {
 
   
-var city = $("#searchInput").val();
+ var cityLower= $("#searchInput").val();
+ var city = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
 	const options = {
 		method: 'GET',
 		headers: {
@@ -190,7 +196,7 @@ var city = $("#searchInput").val();
 			//Places heading
 			var placesHeading = $('<h3>');
 			placesHeading.text(`Places in ${city}`);
-			placesHeading.attr("class", "title");
+			placesHeading.attr("class", "title mx-3");
 			$('.places').append(placesHeading);
 
 			//for loop creating multiple places from the data array
