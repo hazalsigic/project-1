@@ -153,7 +153,8 @@ function getCityEvents() {
 function getCityPlaces() {
 
   
-var city = $("#searchInput").val();
+ var cityLower= $("#searchInput").val();
+ var city = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
 	const options = {
 		method: 'GET',
 		headers: {
@@ -181,7 +182,9 @@ var city = $("#searchInput").val();
 
 			//Places heading
 			var placesHeading = $('<h3>');
-			placesHeading.text('Places to Discover');
+
+			placesHeading.text(`Places in ${city}`);
+			placesHeading.attr("class", "title mx-3");
 			$('.places').append(placesHeading);
 
 			//for loop creating multiple places from the data array
