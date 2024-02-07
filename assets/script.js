@@ -45,11 +45,6 @@ function getCityEvents() {
     var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
     var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
-    var eventHeading = $('<h3>');
-    eventHeading.text(`Events in ${cityName}`);
-	eventHeading.attr("class", "title");
-    $(".eventheader").prepend(eventHeading);
-
 	fetch(baseUrl)
 		.then(function (response) {
 			return response.json();
@@ -90,14 +85,14 @@ function getCityEvents() {
 			}
 			
 			console.log(uniqueEvents);
-			eventHeading.empty();
 			displayCityEvents();
 			//Displays event details in the browser.
 			function displayCityEvents(){
 				var eventHeading = $('<h3>');
 				eventHeading.text(`Events in ${cityName}`);
 				eventHeading.attr("class", "title");
-				$(".eventheader").prepend(eventHeading);
+				$(".event").append(eventHeading);
+
 				for (var k = 0; k < 10; k++) {
 					var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
 					$(".event").append(divEl);
@@ -194,7 +189,7 @@ function getCityPlaces() {
 			var placeAddress = data.results[0].location.formatted_address;
 			console.log(placeName);
 			console.log(placeAddress);
-			console.log(placeCategory); //this is returning in Turkish (my native language), not sure where foursquare getting that info so not sure how to change it to english. If we can't resolve it we can just remove that section.
+			console.log(placeCategory); 
 
 			//Creating the Place section
 
@@ -214,7 +209,7 @@ function getCityPlaces() {
 
 				//Creating card Heading
 				var cardHeading = $('<h5>');
-				cardHeading.attr('class', 'card-title mx-2 mt-2');
+				cardHeading.attr('class', 'card-title mx-3 mt-2');
 				cardHeading.text(data.results[i].name);
 				card.append(cardHeading);
 
