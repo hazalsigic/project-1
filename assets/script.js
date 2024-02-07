@@ -189,7 +189,7 @@ function getCityPlaces() {
 			var placeAddress = data.results[0].location.formatted_address;
 			console.log(placeName);
 			console.log(placeAddress);
-			console.log(placeCategory); //this is returning in Turkish (my native language), not sure where foursquare getting that info so not sure how to change it to english. If we can't resolve it we can just remove that section.
+			console.log(placeCategory); 
 
 			//Creating the Place section
 
