@@ -38,122 +38,114 @@ searchButton.addEventListener('click', function () {
 	searchInput.value = '';
 });
 
-
-//Get Event details based on the city name
 function getCityEvents() {
-
-    
-
-
-    var cityName = $("#searchInput").val();
-    var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
-    var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
-
-    var eventHeading = $('<h3>');
-    eventHeading.text(`Events in ${cityName}`);
-	eventHeading.attr("class", "title");
-    $(".eventheader").prepend(eventHeading);
-
-	fetch(baseUrl)
-		.then(function (response) {
-			return response.json();
-		})
-		.then(function (data) {
-
-			console.log(data);
-
-			var allEvents = data._embedded.events;
-            var copyAllEvents = allEvents;
-            var uniqueEvents = [];
-
-
-			console.log(allEvents);
-			console.log(allEvents[0].images[0].url);
-			console.log(allEvents[0].dates.start.localDate);
-			console.log(allEvents[0].url);
-
-           
- 
-//Function to check duplicate event names.
-    function isAlreadyExist(element) {
-        console.log("Length of copy event:" + copyAllEvents.length);
-        for (var i = 0; i < copyAllEvents.length; i++) {
-            if (element.name === copyAllEvents[i].name) {
-                return true;  
-            }
-        }
-        return false; 
-    }
-    
-    // creates an array without duplicate values by validating event name.
-    for (var j = 0; j < allEvents.length; j++) {
-        if (!uniqueEvents.find(isAlreadyExist)) {
-            uniqueEvents.push(allEvents[j]);
-            console.log("Event added: " + allEvents[j].name);
-        } else {
-            console.log("Duplicate event: " + allEvents[j].name);
-        }
-       copyAllEvents = copyAllEvents.slice(1);
-    }
-    
-    console.log(uniqueEvents);
-    
-	eventHeading.empty();
-    displayCityEvents();
-
    
-
-//Displays event details in the browser.
-function displayCityEvents(){
+	var cityName = $("#searchInput").val();
+	var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
+	var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
   
-  for (var k = 0; k < 6; k++) {
-    
-    var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
-	$(".event").append(divEl);
-
-	var imgDiv = $("<div>")
-	imgDiv.attr("class", "rounded");
-	divEl.append(imgDiv);
-
-	var imgEl=$("<img>").attr({
-		src: uniqueEvents[rIndex].images[0].url,
-		class: "card-img-left example-card-img-responsive",
+	   
+  fetch(baseUrl)
+	.then(function (response) {
+	  return response.json();
 	})
-	imgDiv.append(imgEl);
-
-	var textDiv = $("<div>");
-	textDiv.attr("class", "mx-3 my-2");
-	divEl.append(textDiv);
-
-    var h5El=$("<h5>");
-	h5El.attr("class", "card-title");
-	h5El.text(`${uniqueEvents[rIndex].name}`);
-
-    var dateEl=$("<h6>");
-    var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
-    var ticketEl=$("<a>").attr({href: uniqueEvents[k].url, target: "_blank"}).text("Book Now ");
-    	ticketEl.attr("class", "card-link")
-    h5El.text(`${uniqueEvents[k].name}`);
-    dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
-    	dateEl.attr("class", "card-subtitle");
-
-
-	textDiv.append(h5El);
-	textDiv.append(dateEl);
-	textDiv.append(ticketEl);
+	.then(function (data) {
+  
+	  console.log(data);
+  
+	  var allEvents = data._embedded.events;
+			var copyAllEvents = allEvents;
+			var uniqueEvents = [];
+  
+  
+	  console.log(allEvents);
+	  console.log(allEvents[0].images[0].url);
+	  console.log(allEvents[0].dates.start.localDate);
+	  console.log(allEvents[0].url);
+  
+		   
+  
+  //Function to check duplicate event names.
+	function isAlreadyExist(element) {
+		console.log("Length of copy event:" + copyAllEvents.length);
+		for (var i = 0; i < copyAllEvents.length; i++) {
+			if (element.name === copyAllEvents[i].name) {
+				return true;  
+			}
+		}
+		return false; 
+	}
+	
+	// creates an array without duplicate values by validating event name.
+	for (var j = 0; j < allEvents.length; j++) {
+		if (!uniqueEvents.find(isAlreadyExist)) {
+			uniqueEvents.push(allEvents[j]);
+			console.log("Event added: " + allEvents[j].name);
+		} else {
+			console.log("Duplicate event: " + allEvents[j].name);
+		}
+	   copyAllEvents = copyAllEvents.slice(1);
+	}
+	
+	console.log(uniqueEvents);
+  
+	displayCityEvents();
+  
    
+  
+  //Displays event details in the browser.
+  function displayCityEvents(){
+  
 
-     
+	var eventHeading = $('<h3>');
+	eventHeading.text(`Events in ${cityName}`);
+	eventHeading.attr("class", "title");
+	$(".event").append(eventHeading);
 
+  for (var k = 0; k < 6; k++) {
+		
+	var divEl=$("<div>").attr("class","card flex-row my-2");
+  $(".event").append(divEl);
+  
+  var imgDiv = $("<div>")
+  imgDiv.attr("class", "rounded");
+  divEl.append(imgDiv);
+  
+  var imgEl=$("<img>").attr({
+	src: uniqueEvents[k].images[0].url,
+	class: "card-img-left example-card-img-responsive",
+  })
+  imgDiv.append(imgEl);
+  
+  var textDiv = $("<div>");
+  textDiv.attr("class", "mx-3 my-2");
+  divEl.append(textDiv);
+  
+	var h5El=$("<h5>");
+  h5El.attr("class", "card-title");
+  h5El.text(`${uniqueEvents[k].name}`);
+  
+	var dateEl=$("<h6>");
+  dateEl.attr("class", "card-subtitle");
+  dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
+  
+  var ticketEl=$("<a>").attr("href", uniqueEvents[k].url).text("Book Now ");
+  ticketEl.attr("class", "card-link")
+  
+  textDiv.append(h5El);
+  textDiv.append(dateEl);
+  textDiv.append(ticketEl);
+   
+   
+  
   }
-
-
-
-}
-
-});
-}
-
+  
+   
+  }
+  
+  });
+  }
+  
 
 
 // Foursqare API call
@@ -189,32 +181,31 @@ var city = $("#searchInput").val();
 
 			//Places heading
 			var placesHeading = $('<h3>');
-			placesHeading.text(`Places in ${city}`);
-			placesHeading.attr("class", "title");
+			placesHeading.text('Places to Discover');
 			$('.places').append(placesHeading);
 
 			//for loop creating multiple places from the data array
 			for (i = 0; i < data.results.length; i++) {
 				//Creating the card
 				var card = $('<div>');
-				card.attr('class', 'card my-2 placesCard ml-4');
+				card.attr('class', 'card');
 				$('.places').append(card);
 
 				//Creating card Heading
 				var cardHeading = $('<h5>');
-				cardHeading.attr('class', 'card-title mx-3 mt-2');
+				cardHeading.attr('class', 'card-title');
 				cardHeading.text(data.results[i].name);
 				card.append(cardHeading);
 
 				//Creating place category
 				var cardCategory = $('<p>');
-				cardCategory.attr("class", "card-subtitle text-muted mx-3");
+				cardCategory.attr('card-subtitle', 'mb-2 text-muted');
 				cardCategory.text(data.results[i].categories[0].name);
 				card.append(cardCategory);
 
 				//Adding address to the card
 				var cardAddress = $('<p>');
-				cardAddress.attr('class', 'card-text mx-3 mt-1');
+				cardAddress.attr('class', 'card-text');
 				cardAddress.text(data.results[i].location.formatted_address);
 				card.append(cardAddress);
 			}
