@@ -1,4 +1,5 @@
 // Get references to the input and button elements
+var searchHistory = document.getElementById('old-results');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const messageModal = document.getElementById('messageModal');
@@ -24,6 +25,27 @@ searchButton.addEventListener('click', function () {
 
 	// Perform some action with the search term (e.g., display it in the console)
 	console.log('Search term:', searchTerm);
+
+   //local storage part that will store the old searches 
+    
+	var SearchCity = [] 
+	SearchCity.push(localStorage.getItem("places"))
+	SearchCity.unshift(searchTerm)
+	localStorage.setItem("places", SearchCity)
+    
+
+	// iterate through search - loop function 
+	for (let i = 0 ; i < SearchCity.length; i++) {
+		var city = SearchCity[i]
+		var newli= document.createElement("li");
+		newli.innerText = city
+		searchHistory.appendChild(newli);
+	}
+	// create a li element
+    
+	// set innertext 
+	// append li to searchHistory 
+	
 
 
 
