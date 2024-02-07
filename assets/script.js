@@ -191,24 +191,24 @@ function getCityPlaces() {
 			for (i = 0; i < data.results.length; i++) {
 				//Creating the card
 				var card = $('<div>');
-				card.attr('class', 'card');
+				card.attr('class', 'card my-2 placesCard ml-4');
 				$('.places').append(card);
 
 				//Creating card Heading
 				var cardHeading = $('<h5>');
-				cardHeading.attr('class', 'card-title');
+				cardHeading.attr('class', 'card-title mx-2 mt-2');
 				cardHeading.text(data.results[i].name);
 				card.append(cardHeading);
 
 				//Creating place category
 				var cardCategory = $('<p>');
-				cardCategory.attr('card-subtitle', 'mb-2 text-muted');
+				cardCategory.attr('class', 'card-subtitle mx-3 text-muted');
 				cardCategory.text(data.results[i].categories[0].name);
 				card.append(cardCategory);
 
 				//Adding address to the card
 				var cardAddress = $('<p>');
-				cardAddress.attr('class', 'card-text');
+				cardAddress.attr('class', 'card-text mx-3 mt-1');
 				cardAddress.text(data.results[i].location.formatted_address);
 				card.append(cardAddress);
 			}
