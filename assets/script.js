@@ -39,112 +39,130 @@ searchButton.addEventListener('click', function () {
 });
 
 function getCityEvents() {
-   
-	var cityName = $("#searchInput").val();
-	var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
-	var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
-  
-	   
-  fetch(baseUrl)
-	.then(function (response) {
-	  return response.json();
-	})
-	.then(function (data) {
-  
-	  console.log(data);
-  
-	  var allEvents = data._embedded.events;
-			var copyAllEvents = allEvents;
-			var uniqueEvents = [];
-  
-  
-	  console.log(allEvents);
-	  console.log(allEvents[0].images[0].url);
-	  console.log(allEvents[0].dates.start.localDate);
-	  console.log(allEvents[0].url);
-  
-		   
-  
-  //Function to check duplicate event names.
-	function isAlreadyExist(element) {
-		console.log("Length of copy event:" + copyAllEvents.length);
-		for (var i = 0; i < copyAllEvents.length; i++) {
-			if (element.name === copyAllEvents[i].name) {
-				return true;  
-			}
-		}
-		return false; 
-	}
-	
-	// creates an array without duplicate values by validating event name.
-	for (var j = 0; j < allEvents.length; j++) {
-		if (!uniqueEvents.find(isAlreadyExist)) {
-			uniqueEvents.push(allEvents[j]);
-			console.log("Event added: " + allEvents[j].name);
-		} else {
-			console.log("Duplicate event: " + allEvents[j].name);
-		}
-	   copyAllEvents = copyAllEvents.slice(1);
-	}
-	
-	console.log(uniqueEvents);
-  
-	displayCityEvents();
-  
-   
-  
-  //Displays event details in the browser.
-  function displayCityEvents(){
-  
 
-	var eventHeading = $('<h3>');
-	eventHeading.text(`Events in ${cityName}`);
+	var cityLower= $("#searchInput").val();
+    var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
+    var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
+    var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
+
+    var eventHeading = $('<h3>');
+    eventHeading.text(`Events in ${cityName}`);
 	eventHeading.attr("class", "title");
-	$(".event").append(eventHeading);
+    $(".eventheader").prepend(eventHeading);
 
-  for (var k = 0; k < 6; k++) {
-		
-	var divEl=$("<div>").attr("class","card flex-row my-2");
-  $(".event").append(divEl);
-  
-  var imgDiv = $("<div>")
-  imgDiv.attr("class", "rounded");
-  divEl.append(imgDiv);
-  
-  var imgEl=$("<img>").attr({
-	src: uniqueEvents[k].images[0].url,
-	class: "card-img-left example-card-img-responsive",
-  })
-  imgDiv.append(imgEl);
-  
-  var textDiv = $("<div>");
-  textDiv.attr("class", "mx-3 my-2");
-  divEl.append(textDiv);
-  
-	var h5El=$("<h5>");
-  h5El.attr("class", "card-title");
-  h5El.text(`${uniqueEvents[k].name}`);
-  
-	var dateEl=$("<h6>");
-  dateEl.attr("class", "card-subtitle");
-  dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
-  
-  var ticketEl=$("<a>").attr("href", uniqueEvents[k].url).text("Book Now ");
-  ticketEl.attr("class", "card-link")
-  
-  textDiv.append(h5El);
-  textDiv.append(dateEl);
-  textDiv.append(ticketEl);
-   
-   
-  
-  }
-  
-   
-  }
-  
-  });
-  }
+	fetch(baseUrl)
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (data) {
+
+			console.log(data);
+
+			var allEvents = data._embedded.events;
+            var copyAllEvents = allEvents;
+            var uniqueEvents = [];
+
+
+			console.log(allEvents);
+			console.log(allEvents[0].images[0].url);
+			console.log(allEvents[0].dates.start.localDate);
+			console.log(allEvents[0].url);
+			
+			//Function to check duplicate event names.
+			function isAlreadyExist(element) {
+				console.log("Length of copy event:" + copyAllEvents.length);
+				for (var i = 0; i < copyAllEvents.length; i++) {
+					if (element.name === copyAllEvents[i].name) {
+						return true;  
+					}
+				}
+				return false; 
+			}
+			// creates an array without duplicate values by validating event name.
+			for (var j = 0; j < allEvents.length; j++) {
+				if (!uniqueEvents.find(isAlreadyExist)) {
+					uniqueEvents.push(allEvents[j]);
+					console.log("Event added: " + allEvents[j].name);
+				} else {
+					console.log("Duplicate event: " + allEvents[j].name);
+				}
+				copyAllEvents = copyAllEvents.slice(1);
+			}
+			
+			console.log(uniqueEvents);
+			eventHeading.empty();
+			displayCityEvents();
+			//Displays event details in the browser.
+			function displayCityEvents(){
+				var eventHeading = $('<h3>');
+				eventHeading.text(`Events in ${cityName}`);
+				eventHeading.attr("class", "title");
+				$(".eventheader").prepend(eventHeading);
+				for (var k = 0; k < 10; k++) {
+					var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
+					$(".event").append(divEl);
+					var imgDiv = $("<div>");
+					imgDiv.attr("class", "rounded");
+					divEl.append(imgDiv);
+					var imgEl=$("<img>").attr({
+						src: uniqueEvents[k].images[0].url,
+						class: "card-img-left example-card-img-responsive",
+					});
+					imgDiv.append(imgEl);
+					var textDiv = $("<div>");
+					textDiv.attr("class", "mx-3 my-2");
+					divEl.append(textDiv);
+					var h5El=$("<h5>");
+					h5El.attr("class", "card-title");
+					h5El.text(`${uniqueEvents[k].name}`);
+					var dateEl=$("<h6>");
+					var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
+					var ticketEl=$("<a>").attr({href: uniqueEvents[k].url, target: "_blank"}).text("Book Now ");
+					ticketEl.attr("class", "card-link");
+					h5El.text(`${uniqueEvents[k].name}`);
+					dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
+					dateEl.attr("class", "card-subtitle");
+					textDiv.append(h5El);
+					textDiv.append(dateEl);
+					textDiv.append(ticketEl);
+					
+					//Displays event details in the browser.
+					function displayCityEvents(){
+						var eventHeading = $('<h3>');
+						eventHeading.text(`Events in ${cityName}`);
+						eventHeading.attr("class", "title");
+						$(".event").append(eventHeading);
+						for (var k = 0; k < 6; k++) {
+							var divEl=$("<div>").attr("class","card flex-row my-2");
+							$(".event").append(divEl);
+							var imgDiv = $("<div>")
+							imgDiv.attr("class", "rounded");
+							divEl.append(imgDiv);
+							var imgEl=$("<img>").attr({
+								src: uniqueEvents[k].images[0].url,
+								class: "card-img-left example-card-img-responsive",
+							});
+							imgDiv.append(imgEl);
+							var textDiv = $("<div>");
+							textDiv.attr("class", "mx-3 my-2");
+							divEl.append(textDiv);
+							var h5El=$("<h5>");
+							h5El.attr("class", "card-title");
+							h5El.text(`${uniqueEvents[k].name}`);
+							var dateEl=$("<h6>");
+							dateEl.attr("class", "card-subtitle");
+							dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
+							var ticketEl=$("<a>").attr("href", uniqueEvents[k].url).text("Book Now ");
+							ticketEl.attr("class", "card-link")
+							textDiv.append(h5El);
+							textDiv.append(dateEl);
+							textDiv.append(ticketEl);
+						}
+					}
+				}
+			}
+		})
+	}
   
 
 
@@ -176,7 +194,7 @@ function getCityPlaces() {
 			var placeAddress = data.results[0].location.formatted_address;
 			console.log(placeName);
 			console.log(placeAddress);
-			console.log(placeCategory); //this is returning in Turkish (my native language), not sure where foursquare getting that info so not sure how to change it to english. If we can't resolve it we can just remove that section.
+			console.log(placeCategory); 
 
 			//Creating the Place section
 
@@ -196,7 +214,7 @@ function getCityPlaces() {
 
 				//Creating card Heading
 				var cardHeading = $('<h5>');
-				cardHeading.attr('class', 'card-title mx-2 mt-2');
+				cardHeading.attr('class', 'card-title mx-3 mt-2');
 				cardHeading.text(data.results[i].name);
 				card.append(cardHeading);
 
