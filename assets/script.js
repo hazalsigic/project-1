@@ -7,9 +7,7 @@ const messageBody = document.getElementById('messageBody');
 
 // Add an event listener to the button
 searchButton.addEventListener('click', function () {
-
-
-//Declaring the variables for function getCity
+	//Declaring the variables for function getCity
 
 	// Get the value from the input field and trim whitespace
 	const searchTerm = searchInput.value.trim();
@@ -26,46 +24,26 @@ searchButton.addEventListener('click', function () {
 	// Perform some action with the search term (e.g., display it in the console)
 	console.log('Search term:', searchTerm);
 
-   //local storage part that will store the old searches 
-    
-	var SearchCity = [] 
-	SearchCity.push(localStorage.getItem("places"))
-	SearchCity.unshift(searchTerm)
-	localStorage.setItem("places", SearchCity)
-    
+	$('.event').empty();
+	$('.places').empty();
 
-	// iterate through search - loop function 
-	for (let i = 0 ; i < SearchCity.length; i++) {
-		var city = SearchCity[i]
-		var newli= document.createElement("li");
-		newli.innerText = city
-		searchHistory.appendChild(newli);
-	}
-	// create a li element
-    
-	// set innertext 
-	// append li to searchHistory 
-	
-
-
-
-
-	$(".event").empty();
-    $(".places").empty();
-
-  getCityPlaces();
-  getCityEvents();
+	getCityPlaces();
+	getCityEvents();
 
 	// Clear the input field
 	searchInput.value = '';
 });
 
 function getCityEvents() {
+	var cityLower = $('#searchInput').val();
+	var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
+	var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
+	var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
-	var cityLower= $("#searchInput").val();
-    var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
-    var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
-    var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
+	var eventHeading = $('<h3>');
+	eventHeading.text(`Events in ${cityName}`);
+	eventHeading.attr('class', 'title');
+	$('.eventheader').prepend(eventHeading);
 
     var eventHeading = $('<h3>');
     eventHeading.text(`Events in ${cityName}`);
@@ -77,105 +55,130 @@ function getCityEvents() {
 			return response.json();
 		})
 		.then(function (data) {
-
 			console.log(data);
 
 			var allEvents = data._embedded.events;
-            var copyAllEvents = allEvents;
-            var uniqueEvents = [];
-
+			var copyAllEvents = allEvents;
+			var uniqueEvents = [];
 
 			console.log(allEvents);
 			console.log(allEvents[0].images[0].url);
 			console.log(allEvents[0].dates.start.localDate);
 			console.log(allEvents[0].url);
-			
+
 			//Function to check duplicate event names.
 			function isAlreadyExist(element) {
-				console.log("Length of copy event:" + copyAllEvents.length);
+				console.log('Length of copy event:' + copyAllEvents.length);
 				for (var i = 0; i < copyAllEvents.length; i++) {
 					if (element.name === copyAllEvents[i].name) {
-						return true;  
+						return true;
 					}
 				}
-				return false; 
+				return false;
 			}
 			// creates an array without duplicate values by validating event name.
 			for (var j = 0; j < allEvents.length; j++) {
 				if (!uniqueEvents.find(isAlreadyExist)) {
 					uniqueEvents.push(allEvents[j]);
-					console.log("Event added: " + allEvents[j].name);
+					console.log('Event added: ' + allEvents[j].name);
 				} else {
-					console.log("Duplicate event: " + allEvents[j].name);
+					console.log('Duplicate event: ' + allEvents[j].name);
 				}
 				copyAllEvents = copyAllEvents.slice(1);
 			}
-			
+
 			console.log(uniqueEvents);
 			eventHeading.empty();
 			displayCityEvents();
 			//Displays event details in the browser.
-			function displayCityEvents(){
+			function displayCityEvents() {
 				var eventHeading = $('<h3>');
 				eventHeading.text(`Events in ${cityName}`);
+<<<<<<< Updated upstream
 				eventHeading.attr("class", "title");
+<<<<<<< HEAD
 				$(".eventheader").prepend(eventHeading);
+=======
+				$(".event").append(eventHeading);
+
+=======
+				eventHeading.attr('class', 'title');
+				$('.eventheader').prepend(eventHeading);
+>>>>>>> Stashed changes
+>>>>>>> cc3caa4c5f74a38e6eee897342be898dcba5664d
 				for (var k = 0; k < 10; k++) {
-					var divEl=$("<div>").attr("class","card flex-row my-2 mr-4");
-					$(".event").append(divEl);
-					var imgDiv = $("<div>");
-					imgDiv.attr("class", "rounded");
+					var divEl = $('<div>').attr(
+						'class',
+						'card flex-row my-2 mr-4'
+					);
+					$('.event').append(divEl);
+					var imgDiv = $('<div>');
+					imgDiv.attr('class', 'rounded');
 					divEl.append(imgDiv);
-					var imgEl=$("<img>").attr({
+					var imgEl = $('<img>').attr({
 						src: uniqueEvents[k].images[0].url,
-						class: "card-img-left example-card-img-responsive",
+						class: 'card-img-left example-card-img-responsive',
 					});
 					imgDiv.append(imgEl);
-					var textDiv = $("<div>");
-					textDiv.attr("class", "mx-3 my-2");
+					var textDiv = $('<div>');
+					textDiv.attr('class', 'mx-3 my-2');
 					divEl.append(textDiv);
-					var h5El=$("<h5>");
-					h5El.attr("class", "card-title");
+					var h5El = $('<h5>');
+					h5El.attr('class', 'card-title');
 					h5El.text(`${uniqueEvents[k].name}`);
-					var dateEl=$("<h6>");
-					var imgEl=$("<img>").attr("src",uniqueEvents[k].images[0].url);
-					var ticketEl=$("<a>").attr({href: uniqueEvents[k].url, target: "_blank"}).text("Book Now ");
-					ticketEl.attr("class", "card-link");
+					var dateEl = $('<h6>');
+					var imgEl = $('<img>').attr(
+						'src',
+						uniqueEvents[k].images[0].url
+					);
+					var ticketEl = $('<a>')
+						.attr({href: uniqueEvents[k].url, target: '_blank'})
+						.text('Book Now ');
+					ticketEl.attr('class', 'card-link');
 					h5El.text(`${uniqueEvents[k].name}`);
-					dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
-					dateEl.attr("class", "card-subtitle");
+					dateEl.text(
+						`Date:${uniqueEvents[k].dates.start.localDate}`
+					);
+					dateEl.attr('class', 'card-subtitle');
 					textDiv.append(h5El);
 					textDiv.append(dateEl);
 					textDiv.append(ticketEl);
-					
+
 					//Displays event details in the browser.
-					function displayCityEvents(){
+					function displayCityEvents() {
 						var eventHeading = $('<h3>');
 						eventHeading.text(`Events in ${cityName}`);
-						eventHeading.attr("class", "title");
-						$(".event").append(eventHeading);
+						eventHeading.attr('class', 'title');
+						$('.event').append(eventHeading);
 						for (var k = 0; k < 6; k++) {
-							var divEl=$("<div>").attr("class","card flex-row my-2");
-							$(".event").append(divEl);
-							var imgDiv = $("<div>")
-							imgDiv.attr("class", "rounded");
+							var divEl = $('<div>').attr(
+								'class',
+								'card flex-row my-2'
+							);
+							$('.event').append(divEl);
+							var imgDiv = $('<div>');
+							imgDiv.attr('class', 'rounded');
 							divEl.append(imgDiv);
-							var imgEl=$("<img>").attr({
+							var imgEl = $('<img>').attr({
 								src: uniqueEvents[k].images[0].url,
-								class: "card-img-left example-card-img-responsive",
+								class: 'card-img-left example-card-img-responsive',
 							});
 							imgDiv.append(imgEl);
-							var textDiv = $("<div>");
-							textDiv.attr("class", "mx-3 my-2");
+							var textDiv = $('<div>');
+							textDiv.attr('class', 'mx-3 my-2');
 							divEl.append(textDiv);
-							var h5El=$("<h5>");
-							h5El.attr("class", "card-title");
+							var h5El = $('<h5>');
+							h5El.attr('class', 'card-title');
 							h5El.text(`${uniqueEvents[k].name}`);
-							var dateEl=$("<h6>");
-							dateEl.attr("class", "card-subtitle");
-							dateEl.text(`Date:${uniqueEvents[k].dates.start.localDate }`);
-							var ticketEl=$("<a>").attr("href", uniqueEvents[k].url).text("Book Now ");
-							ticketEl.attr("class", "card-link")
+							var dateEl = $('<h6>');
+							dateEl.attr('class', 'card-subtitle');
+							dateEl.text(
+								`Date:${uniqueEvents[k].dates.start.localDate}`
+							);
+							var ticketEl = $('<a>')
+								.attr('href', uniqueEvents[k].url)
+								.text('Book Now ');
+							ticketEl.attr('class', 'card-link');
 							textDiv.append(h5El);
 							textDiv.append(dateEl);
 							textDiv.append(ticketEl);
@@ -183,18 +186,14 @@ function getCityEvents() {
 					}
 				}
 			}
-		})
-	}
-  
-
+		});
+}
 
 // Foursqare API call
 
 function getCityPlaces() {
-
-  
- var cityLower= $("#searchInput").val();
- var city = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
+	var cityLower = $('#searchInput').val();
+	var city = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
 	const options = {
 		method: 'GET',
 		headers: {
@@ -224,7 +223,7 @@ function getCityPlaces() {
 			var placesHeading = $('<h3>');
 
 			placesHeading.text(`Places in ${city}`);
-			placesHeading.attr("class", "title mx-3");
+			placesHeading.attr('class', 'title mx-3');
 			$('.places').append(placesHeading);
 
 			//for loop creating multiple places from the data array
@@ -254,5 +253,3 @@ function getCityPlaces() {
 			}
 		});
 }
-
-
