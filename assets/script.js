@@ -6,7 +6,10 @@ const messageBody = document.getElementById('messageBody');
 
 var oldCity = [];
 
+//localStorage.clear();
+
 //Creating the dropdown list items
+
 
 if (localStorage.getItem("places")) {
 
@@ -55,17 +58,14 @@ searchButton.addEventListener('click', function () {
 	console.log('Search term:', searchTerm);
 
    //local storage part that will store the old searches 
-    var capitalSearchTerm = searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1);
-	
-	//oldCity.push(capitalSearchTerm);
-	if($.inArray(capitalSearchTerm, oldCity) === -1) oldCity.push(capitalSearchTerm);
-	localStorage.setItem("places", JSON.stringify(oldCity));
+    
+	oldCity.push(searchTerm);
+    localStorage.setItem("places", JSON.stringify(oldCity));
     
 
 
 	$('.event').empty();
 	$('.places').empty();
-
 
 	getCityPlaces();
 	getCityEvents();
@@ -75,12 +75,15 @@ searchButton.addEventListener('click', function () {
 });
 
 function getCityEvents() {
+	var cityLower = $('#searchInput').val();
+	var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
+	var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
+	var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
 	var cityLower= $("#searchInput").val();
     var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
     var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
     var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
-
 
 	fetch(baseUrl)
 		.then(function (response) {
@@ -120,15 +123,15 @@ function getCityEvents() {
 			}
 
 			console.log(uniqueEvents);
+			
 			displayCityEvents();
 			//Displays event details in the browser.
 			function displayCityEvents() {
 				var eventHeading = $('<h3>');
 				eventHeading.text(`Events in ${cityName}`);
-
-				eventHeading.attr("class", "title");
+			    eventHeading.attr("class", "title");
 				$(".event").append(eventHeading);
-
+				eventHeading.attr('class', 'title');		
 				for (var k = 0; k < 10; k++) {
 					var divEl = $('<div>').attr(
 						'class',

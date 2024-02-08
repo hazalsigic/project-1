@@ -10,43 +10,58 @@ Whether users are seeking exciting events or intriguing places to visit, our app
 
 ## Table of Contents
 
--   [Installation](#installation)
 -   [Usage](#usage)
+-   [Demo](#demo)
+-   [screenshots](#screenshots)
 -   [Credits](#credits)
--   [License](#license)
 
-## Installation
-
-N/A
 
 ## Usage
 
-You can view the website via this link: ![City Explorer](https://hazalsigic.github.io/project-1/)
+You can view the website via this link: [City Explorer](https://hazalsigic.github.io/project-1/)
 
-## Animated gifs
+Git hub repository link: [Project1-CityExplorer](https://github.com/hazalsigic/project-1)
 
--   ![alt text](assets/images/city%20explorer.mp4)
--   ![alt text](assets/example.gifs)
 
+## Demo:
+
+ ![City Explorer Demo](./assets/images/CityExplorergif.gif)
+ 
+ - When the user enters city name he wants to explore, user is displayed with places to visit in the city and events happening in the city.
+ - When the user gives no city name and click on search button user is displayed with message to enter city name.
+ - When the user choose particular event and clicks book now, user will be redirected to TicketMaster webpage to book tickets.
+ - When the user clicks on the search history user is displayed with list of city names that user searched previously .
+ - User can simply choose the cityname from the search history list instead of typing again and user will be displayed with  city events and place details as per user choice.
+
+  
 ## Screenshots
+###  Lannding Page
+-   ![landingPage](./assets/images/screenshots/LandingPage.png)
+### ErrorMessage when user clicks search button without input
+-   ![ErrorMessage when user clicks search button without input ](./assets/images/screenshots/Errormsg.png)
+### Displaying Data as per user input
+-   ![Displaying Data as per user input](./assets/images/screenshots/Searchcity.png)
+### Dispalying data from localstorage
+-   ![Dispalying data from localstorage](./assets/images/screenshots/Displayingsearchhistory.png)
 
--   ![alt text](assets/example.png)
--   ![alt text](assets/example.png)
-
-## Contributing
+## Contributors:
 
 -   Hazal Sigic
 -   Vinothini Santhosh
 -   Francis Gomes-Okoye
 -   Lucas Prates
 
-### List of third-party assets.
+### List of third-party assets and References used:
 
--   ![Foursquare APIS](https://location.foursquare.com/developer/)
--   ![Ticket Master](https://developer.ticketmaster.com/)
+-   [Foursquare APIS](https://location.foursquare.com/developer/)
+-   [Ticket Master](https://developer.ticketmaster.com/)
+-   [bootstrap ](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+-   [jquery](https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js)
 
-## License
+-   [Refrence used to create custom find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find#find_an_object_in_an_array_by_one_of_its_properties)
+-   [DropDown](https://www.w3schools.com/bootstrap4/bootstrap_dropdowns.asp)
+-   [Using fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 
-Please refer to the repo.
 
----
+
+
