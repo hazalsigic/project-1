@@ -94,18 +94,10 @@ function getCityEvents() {
 	var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
 	var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
 
-<<<<<<< Updated upstream
 	var cityLower= $("#searchInput").val();
     var cityName = cityLower.charAt(0).toUpperCase() + cityLower.slice(1)
     var apiKey = 'NGMel7eRMUXXZi8wrXSz5U45GI25vqZI';
     var baseUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=NGMel7eRMUXXZi8wrXSz5U45GI25vqZI&locale=*&size=200&city=${cityName}&apikey=${apiKey}`;
-=======
-	var eventHeading = $('<h3>');
-  
-	eventHeading.text(`Events in ${cityName}`);
-	eventHeading.attr('class', 'title');
-	$('.eventheader').prepend(eventHeading);
->>>>>>> Stashed changes
 
 	fetch(baseUrl)
 		.then(function (response) {
