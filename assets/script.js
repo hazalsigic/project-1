@@ -55,8 +55,10 @@ searchButton.addEventListener('click', function () {
 	console.log('Search term:', searchTerm);
 
    //local storage part that will store the old searches 
-    
-	oldCity.push(searchTerm);
+    var capitalSearchTerm = searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1);
+	
+	//oldCity.push(capitalSearchTerm);
+	if($.inArray(capitalSearchTerm, oldCity) === -1) oldCity.push(capitalSearchTerm);
 	localStorage.setItem("places", JSON.stringify(oldCity));
     
 
