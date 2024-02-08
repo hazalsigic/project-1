@@ -1,9 +1,39 @@
 // Get references to the input and button elements
-var searchHistory = document.getElementById('old-results');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const messageModal = document.getElementById('messageModal');
 const messageBody = document.getElementById('messageBody');
+
+var oldCity = [];
+
+//Creating the dropdown list items
+
+if (localStorage.getItem("places")) {
+
+	$("#dropdownList").empty();
+
+	oldCity = JSON.parse(localStorage.getItem("places"));
+	console.log(oldCity)
+	
+	// iterate through localstorage  
+	for (i = 0 ; i < oldCity.length; i++) {
+		var newLi = $("<li>");
+		newLi.attr("class", " text-center my-1 oldSearch");
+		newLi.text(oldCity[i]);
+		$("#dropdownList").append(newLi);
+	} 
+};
+
+//if a city in history section is clicked, the name of the city appears in the search bar
+$(".oldSearch").on("click", function(event) {
+	var newSearch = $(this).text();
+	console.log(newSearch);
+	$("#searchInput").val(newSearch);
+
+})
+
+
+
 
 // Add an event listener to the button
 searchButton.addEventListener('click', function () {
@@ -28,24 +58,9 @@ searchButton.addEventListener('click', function () {
 
    //local storage part that will store the old searches 
     
-	var SearchCity = [] 
-	SearchCity.push(localStorage.getItem("places"))
-	SearchCity.unshift(searchTerm)
-	localStorage.setItem("places", SearchCity)
+	oldCity.push(searchTerm);
+	localStorage.setItem("places", JSON.stringify(oldCity));
     
-
-	// iterate through search - loop function 
-	for (let i = 0 ; i < SearchCity.length; i++) {
-		var city = SearchCity[i]
-		var newli= document.createElement("li");
-		newli.innerText = city
-		searchHistory.appendChild(newli);
-	}
-	// create a li element
-    
-	// set innertext 
-	// append li to searchHistory 
-	
 
 
 
