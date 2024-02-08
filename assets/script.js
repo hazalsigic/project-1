@@ -6,7 +6,10 @@ const messageBody = document.getElementById('messageBody');
 
 var oldCity = [];
 
+//localStorage.clear();
+
 //Creating the dropdown list items
+
 
 if (localStorage.getItem("places")) {
 
@@ -57,7 +60,7 @@ searchButton.addEventListener('click', function () {
    //local storage part that will store the old searches 
     
 	oldCity.push(searchTerm);
-	localStorage.setItem("places", JSON.stringify(oldCity));
+    localStorage.setItem("places", JSON.stringify(oldCity));
     
 
 
@@ -120,18 +123,15 @@ function getCityEvents() {
 			}
 
 			console.log(uniqueEvents);
-			eventHeading.empty();
+			
 			displayCityEvents();
 			//Displays event details in the browser.
 			function displayCityEvents() {
 				var eventHeading = $('<h3>');
 				eventHeading.text(`Events in ${cityName}`);
-
-				eventHeading.attr("class", "title");
+			    eventHeading.attr("class", "title");
 				$(".event").append(eventHeading);
-
-				eventHeading.attr('class', 'title');
-				$('.eventheader').prepend(eventHeading);
+				eventHeading.attr('class', 'title');		
 				for (var k = 0; k < 10; k++) {
 					var divEl = $('<div>').attr(
 						'class',
