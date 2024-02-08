@@ -54,7 +54,6 @@ searchButton.addEventListener('click', function () {
 	// Perform some action with the search term (e.g., display it in the console)
 	console.log('Search term:', searchTerm);
 
-<<<<<<< Updated upstream
    //local storage part that will store the old searches 
     
 	var SearchCity = [] 
@@ -76,10 +75,8 @@ searchButton.addEventListener('click', function () {
 	// append li to searchHistory 
 	
 
-=======
 	$('.event').empty();
 	$('.places').empty();
->>>>>>> Stashed changes
 
 	getCityPlaces();
 	getCityEvents();
@@ -145,15 +142,10 @@ function getCityEvents() {
 				eventHeading.text(`Events in ${cityName}`);
 
 				eventHeading.attr("class", "title");
-<<<<<<< HEAD
-				$(".eventheader").prepend(eventHeading);
-=======
 				$(".event").append(eventHeading);
 
-=======
 				eventHeading.attr('class', 'title');
 				$('.eventheader').prepend(eventHeading);
->>>>>>> Stashed changes
 				for (var k = 0; k < 10; k++) {
 					var divEl = $('<div>').attr(
 						'class',
