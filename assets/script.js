@@ -56,24 +56,10 @@ searchButton.addEventListener('click', function () {
 
    //local storage part that will store the old searches 
     
-	var SearchCity = [] 
-	SearchCity.push(localStorage.getItem("places"))
-	SearchCity.unshift(searchTerm)
-	localStorage.setItem("places", SearchCity)
+	oldCity.push(searchTerm);
+	localStorage.setItem("places", JSON.stringify(oldCity));
     
 
-	// iterate through search - loop function 
-	for (let i = 0 ; i < SearchCity.length; i++) {
-		var city = SearchCity[i]
-		var newli= document.createElement("li");
-		newli.innerText = city
-		searchHistory.appendChild(newli);
-	}
-	// create a li element
-    
-	// set innertext 
-	// append li to searchHistory 
-	
 
 	$('.event').empty();
 	$('.places').empty();
