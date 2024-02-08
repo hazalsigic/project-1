@@ -25,13 +25,13 @@ You can view the website via this link: ![City Explorer](https://hazalsigic.gith
 
 ## Animated gifs
 
--   ![alt text](assets/images/city%20explorer.mp4)
--   ![alt text](assets/example.gifs)
+-   ![alt text](./assets/images/city%20explorer.mp4)
+-   ![alt text](./assets/example.gifs)
 
 ## Screenshots
 
--   ![alt text](assets/example.png)
--   ![alt text](assets/example.png)
+-   ![alt text](./assets/example.png)
+-   ![alt text](./assets/example.png)
 
 ## Contributing
 
@@ -42,8 +42,8 @@ You can view the website via this link: ![City Explorer](https://hazalsigic.gith
 
 ### List of third-party assets.
 
--   ![Foursquare APIS](https://location.foursquare.com/developer/)
--   ![Ticket Master](https://developer.ticketmaster.com/)
+-   Foursquare APIS: https://location.foursquare.com/developer/
+-   Ticket Master: https://developer.ticketmaster.com/
 
 ## License
 
